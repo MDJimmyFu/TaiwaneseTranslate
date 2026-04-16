@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>台語語音轉錄與合成</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <p class="eyebrow">Breeze-ASR-26 + BreezyVoice</p>
+        <h1>台語語音 ↔ 中文文字</h1>
+        <p class="subtitle">行動優先介面，可部署在 GitHub Pages + 免費 API 代理</p>
+      </header>
+
+      <section class="card" aria-labelledby="asr-title">
+        <div class="card-head">
+          <h2 id="asr-title">語音轉文字（台語 → 中文）</h2>
+          <span id="recordingState" class="status">待機中</span>
+        </div>
+
+        <div class="button-row">
+          <button id="startRecord" class="btn btn-primary">開始錄音</button>
+          <button id="stopRecord" class="btn" disabled>停止並轉錄</button>
+        </div>
+
+        <label for="audioUpload" class="upload-label">或上傳音檔（wav / mp3 / m4a）</label>
+        <input id="audioUpload" type="file" accept="audio/*" />
+
+        <label for="asrResult">轉錄結果</label>
+        <textarea id="asrResult" rows="4" placeholder="轉錄後的中文會出現在這裡"></textarea>
+      </section>
+
+      <section class="card" aria-labelledby="tts-title">
+        <h2 id="tts-title">文字轉語音（中文 → 台語）</h2>
+        <label for="ttsInput">請輸入中文</label>
+        <textarea id="ttsInput" rows="4" placeholder="例如：今天天氣真好，我想去逛夜市。"></textarea>
+
+        <button id="synthesize" class="btn btn-primary">產生台語語音</button>
+        <audio id="ttsPlayer" controls class="player"></audio>
+      </section>
+
+      <section class="card" aria-labelledby="api-title">
+        <h2 id="api-title">API 設定</h2>
+        <p>建議將 Token 放在伺服器端。若只是快速測試，也可暫時貼在下方（會儲存在本機瀏覽器）。</p>
+
+        <label for="apiBase">Proxy API Base URL</label>
+        <input id="apiBase" type="url" placeholder="https://your-worker.your-subdomain.workers.dev" />
+
+        <label for="hfToken">Hugging Face Token（可留空）</label>
+        <input id="hfToken" type="password" placeholder="hf_xxx" autocomplete="off" />
+
+        <button id="saveConfig" class="btn">儲存設定</button>
+      </section>
+
+      <p id="message" class="message" role="status"></p>
+    </main>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
